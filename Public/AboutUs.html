@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - College Athlete Connect</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <div id="navbar-placeholder"></div>
+    </header>
+    <script>
+        fetch('navbar.html')
+            .then(response => response.text())
+            .then(text => document.getElementById('navbar-placeholder').innerHTML = text);
+    </script>
+    <main class="about-box">
+        <section class="about-top">
+            <h1>Made by Athletes, for Athletes.</h1>
+            <figure>
+                <img src="images/aboutuspic.jpg" alt="Mikey Squires">
+                <figcaption><em>Founder: Mikey Squires, Princeton Wrestling 174lbs, COS BSE c/o 2025</em></figcaption>
+            </figure>
+        </section>
+        <section class="about-info">
+            <h1>College Athlete Connect: Our Story</h1>
+            <p>
+                College Athlete Connect was founded on the belief that every high school athlete deserves the
+                opportunity to continue their sport in college. For most aspiring athletes, the problem is not a
+                willingness to do the work, but finding the right coaches to bring them to the next level.
+            </p>
+            <p>
+                Growing up in a rural town in Upstate NY, I was hard-pressed finding wrestling coaches to elevate me to
+                the level of a D1 recruit. Our only solution was my father leaving straight from work, driving me an
+                hour in each direction to practice four nights a week, depriving me of time with my mother and sister at
+                home. Many of my teammates were forced to do the same thing. With the countless sacrifices already made
+                to be a high level athlete, this is not one that should have to be made.
+            </p>
+            <p>
+                Now that I am on the opposite side, a college student-athlete strapped for cash, I would love to give
+                back to the community that gave so much to me. But for someone looking to coach, there is no way to find
+                clients without handling the marketing yourself.
+            </p>
+            <p>
+                College Athlete Connect serves as a two way solution. Any athlete in need of a coach can find one. And
+                any athlete looking to coach can find a client. We handle the rest. We will continue growing to serve
+                the greatest number of athletes possible, and make collegiate athletics accessible to everyone.
+            </p>
+        </section>
+        <section class="contact-info">
+            <h2>Contact Us</h2>
+            <p>Please reach out for business inquires, as well as questions/concerns about our business or platform.
+            </p>
+            <p><a href="mailto:mikey@college-athlete-connect.com">Email: mikey@college-athlete-connect.com</a></p>
+            <p><a href="tel:+16073739330">Phone: (607) 373-9330</a></p>
+        </section>
+    </main>
+    <footer>
+        <p> 2024 College Athlete Connect</p>
+    </footer>
+</body>
+
+</html>
+
+<!-- The above code was created with assitance from Chat GPT-->

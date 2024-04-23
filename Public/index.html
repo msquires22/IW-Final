@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Athlete Connect</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <div id="navbar-placeholder"></div>
+    </header>
+    <script>
+        fetch('navbar.html')
+            .then(response => response.text())
+            .then(text => document.getElementById('navbar-placeholder').innerHTML = text);
+    </script>
+
+    <main>
+        <img src="./images/banner.png" alt="banner" class="banner-home">
+        <section class="section-home">
+            <h1>Welcome to College Athlete Connect</h1>
+            <p>Connecting aspiring college athletes with current collegiate athletes nationwide for coaching and
+                mentoring.</p>
+            <a href="AboutUs.html" class="btn-home">Learn More</a>
+        </section>
+        <section class="section-home">
+            <h2>Looking for a coach?</h2>
+            <p>Find one now.</p>
+            <a href="FindaCoach.html" class="btn-home">Find a Coach</a>
+        </section>
+        <section class="section-home">
+            <h2>Are you an athlete looking to monetize your skills?</h2>
+            <p>Join our community as a coach.</p>
+            <a href="SignUp.html" class="btn-home">Sign Up</a>
+        </section>
+    </main>
+
+    <footer>
+        <p> 2024 College Athlete Connect.</p>
+    </footer>
+</body>
+
+</html>
+
+<!-- The above code was created with assitance from Chat GPT-->

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find a Coach</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <div id="navbar-placeholder"></div>
+    </header>
+    <script>
+        fetch('navbar.html')
+            .then(response => response.text())
+            .then(text => document.getElementById('navbar-placeholder').innerHTML = text);
+    </script>
+
+    <div id="search-container">
+        <p id="search-message"><strong>Find an athlete to coach you! Search for a specific athlete, sport, or
+                school.</strong></p>
+        <input type="text" id="profile-search" placeholder="Search profiles...">
+    </div>
+
+
+
+    <main id="profiles-container" class="profiles-grid">
+        <!-- Profiles will be loaded here -->
+    </main>
+
+
+    <div id="profile-modal" class="modal">
+        <!-- Detailed profile info will be shown in a modal here -->
+    </div>
+
+    <footer>
+        <p>2024 College Athlete Connect.</p>
+    </footer>
+
+    <script type="module">
+        import { db } from './firebaseconfig.js';
+        import { collection, getDocs } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js';
+
+        const profilesContainer = document.getElementById('profiles-container');
+        const profileModal = document.getElementById('profile-modal');
+        const modalContent = document.createElement('div'); // Assuming you'll append details here
+        modalContent.classList.add('modal-content');
+        profileModal.appendChild(modalContent);
+
+        // Function to open modal and display profile details
+        function openModal(userData) {
+            modalContent.innerHTML = `
+        <span class="close">&times;</span>
+        <img src="${userData.photoURL || './images/profileIcon.jpeg'}" alt="Profile Image" style="width:100%; max-width: 200px; height: auto; margin-bottom: 20px; border-radius: 8px;">
+        <h2>${userData.name}</h2>
+        <p><strong>Sport:</strong> ${userData.sport}</p>
+        <p><strong>School:</strong> ${userData.school}</p>
+        <p><strong>Class Year:</strong> ${userData.classYear}</p>
+        <p><strong>Rate:</strong> ${userData.rate}</p>
+        <p><strong>Email:</strong> ${userData.email}</p>
+        <p><strong>Phone Number:</strong> ${userData.phoneNumber}</p>
+        <p><strong>Bio:</strong> ${userData.bio}</p>
+    `;
+            profileModal.style.display = 'block';
+
+            // Close button inside the modal
+            modalContent.querySelector('.close').addEventListener('click', closeModal);
+        }
+
+
+        // Function to close modal
+        function closeModal() {
+            profileModal.style.display = 'none';
+        }
+
+        // Close modal if clicked outside of modal content
+        window.onclick = function (event) {
+            if (event.target == profileModal) {
+                closeModal();
+            }
+        };
+
+        async function loadProfiles(filter = "") {
+            profilesContainer.innerHTML = ''; // Clear existing profiles
+            const querySnapshot = await getDocs(collection(db, "users"));
+            querySnapshot.forEach((doc) => {
+                const userData = doc.data();
+                const profileText = `${userData.name} ${userData.sport} ${userData.school}`.toLowerCase();
+                if (!filter || profileText.includes(filter.toLowerCase())) {
+                    const profileBox = document.createElement('div');
+                    profileBox.classList.add('profile-box');
+                    profileBox.innerHTML = `
+                        <img src="${userData.photoURL || './images/profileIcon.jpeg'}" alt="Profile Image">
+                        <p>${userData.name}</p>
+                        <p>${userData.sport}</p>
+                        <p>${userData.school}</p>
+                    `;
+                    profilesContainer.appendChild(profileBox);
+                    profileBox.addEventListener('click', () => openModal(userData));
+                }
+            });
+        }
+
+        loadProfiles();
+
+        document.getElementById('profile-search').addEventListener('input', (e) => {
+            const searchTerm = e.target.value;
+            loadProfiles(searchTerm); // Reload profiles with filter
+        });
+    </script>
+
+
+
+</body>
+
+</html>
+
+<!-- The above code was created with assitance from Chat GPT-->

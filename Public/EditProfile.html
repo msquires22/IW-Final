@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile - College Athlete Connect</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <div id="navbar-placeholder"></div>
+    </header>
+    <script>
+        fetch('navbar.html')
+            .then(response => response.text())
+            .then(text => document.getElementById('navbar-placeholder').innerHTML = text);
+    </script>
+    <main class="signup-container">
+        <h2>Edit Profile</h2>
+        <form id="profile-form" class="signup-form">
+            <div class="form-field">
+                <label for="name">Name:</label>
+                <input type="text" name="name" placeholder="Your Full Name" required>
+            </div>
+            <div class="form-field">
+                <label for="sport">Sport:</label>
+                <input type="text" name="sport" placeholder="Sport" required>
+            </div>
+            <div class="form-field">
+                <label for="school">School:</label>
+                <input type="text" name="school" placeholder="School" required>
+            </div>
+            <div class="form-field">
+                <label for="classYear">Class Year:</label>
+                <input type="text" name="classYear" placeholder="Class Year" required>
+            </div>
+            <div class="form-field">
+                <label for="rate">Rate:</label>
+                <input type="text" name="rate" placeholder="Rate" required>
+            </div>
+            <div class="form-field bio-field">
+                <label for="bio">Bio:</label>
+                <textarea name="bio" placeholder="Bio - Tell us about yourself" rows="4" required></textarea>
+            </div>
+            <div class="form-field">
+                <label for="email">Email:</label>
+                <input type="email" name="email" placeholder="Email" required>
+            </div>
+            <div class="form-field">
+                <label for="phoneNumber">Phone Number:</label>
+                <input type="tel" name="phoneNumber" placeholder="Phone Number" required>
+            </div>
+            <div class="form-field">
+                <label for="photo">Photo: (Make it Square!)</label>
+                <input type="file" name="photo" accept="image/*">
+            </div>
+            <button type="submit">Update Profile</button>
+        </form>
+    </main>
+    <footer>
+        <p>2024 College Athlete Connect</p>
+    </footer>
+
+    <script type="module">
+        import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js';
+        import { db } from './firebaseconfig.js';
+        import { doc, getDoc, setDoc } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js';
+        import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-storage.js';
+
+        let currentUser;
+
+        const auth = getAuth();
+        // Initialize Firebase Storage
+        const storage = getStorage();
+        onAuthStateChanged(auth, user => {
+            if (user) {
+                currentUser = user;
+                const docRef = doc(db, "users", user.uid);
+                getDoc(docRef).then(docSnap => {
+                    if (docSnap.exists()) {
+                        const userData = docSnap.data();
+                        // Update form fields with user data
+                        document.querySelector('[name="name"]').value = userData.name || '';
+                        document.querySelector('[name="sport"]').value = userData.sport || '';
+                        document.querySelector('[name="school"]').value = userData.school || '';
+                        document.querySelector('[name="classYear"]').value = userData.classYear || '';
+                        document.querySelector('[name="rate"]').value = userData.rate || '';
+                        document.querySelector('[name="bio"]').value = userData.bio || '';
+                        document.querySelector('[name="email"]').value = userData.email || '';
+                        document.querySelector('[name="phoneNumber"]').value = userData.phoneNumber || '';
+                    } else {
+                        console.log("No profile found!");
+                    }
+                });
+            } else {
+                window.location.href = 'LogIn.html';
+            }
+        });
+
+        document.getElementById('profile-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const file = e.target.photo.files[0]; // Get the file from the input
+            let photoURL = null; // Initialize photoURL variable
+
+            if (file) {
+                // Create a storage reference
+                const storageRef = ref(storage, `profile_photos/${currentUser.uid}/${file.name}`);
+                try {
+                    // Upload file
+                    const snapshot = await uploadBytes(storageRef, file);
+                    console.log('Uploaded a blob or file!');
+
+                    // Get file URL
+                    photoURL = await getDownloadURL(snapshot.ref);
+                } catch (error) {
+                    console.error("Error uploading file: ", error);
+                    // Handle the error, e.g., show a message to the user
+                    return; // Ensure execution stops if file upload fails
+                }
+            }
+
+            const formData = {
+                name: e.target.name.value,
+                sport: e.target.sport.value,
+                school: e.target.school.value,
+                classYear: e.target.classYear.value,
+                rate: e.target.rate.value,
+                bio: e.target.bio.value,
+                email: e.target.email.value,
+                phoneNumber: e.target.phoneNumber.value,
+            };
+
+            // Only add photoURL to formData if a new photo was uploaded
+            if (photoURL !== null) {
+                formData.photoURL = photoURL;
+            }
+
+            try {
+                await setDoc(doc(db, "users", currentUser.uid), formData, { merge: true });
+                console.log("Profile updated successfully.");
+                window.location.href = 'Profile.html'; // Redirect after update
+            } catch (error) {
+                console.error("Error updating profile: ", error);
+                // Handle the error, e.g., show an error message
+            }
+        });
+    </script>
+
+</body>
+
+</html>
+
+<!-- The above code was created with assitance from Chat GPT-->

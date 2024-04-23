@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - College Athlete Connect</title>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+    <header>
+        <div id="navbar-placeholder"></div>
+    </header>
+    <script>
+        fetch('navbar.html')
+            .then(response => response.text())
+            .then(text => document.getElementById('navbar-placeholder').innerHTML = text);
+    </script>
+
+    <main class="faq-container">
+        <section>
+            <div class="faq-question">What is College Athlete Connect?</div>
+            <div class="faq-answer">
+                College Athlete Connect is a platform that connects college athletes looking to earn extra income by
+                coaching with high school athletes and their parents who are seeking personalized coaching. Our platform
+                handles the marketing and provides an easy way for athletes to offer their coaching services, helping
+                them find clients efficiently.
+            </div>
+
+            <div class="faq-question">Is there a fee to use College Athlete Connect?</div>
+            <div class="faq-answer">
+                No! College Athlete Connect is currently free to use for both coaches and athletes. As we grow, we plan
+                on adding a paywall, so take advantage and spread the word now!
+            </div>
+
+            <div class="faq-question">How do I find the right coach for my needs?</div>
+            <div class="faq-answer">
+                You can browse coach profiles on our platform by sport, location, experience, and rate. Use our search
+                tool to find coaches who match your specific requirements. Once you find a potential coach, you can view
+                their full profile for more details and contact them directly to arrange a session.
+            </div>
+
+            <div class="faq-question">How do I sign up as a coach?</div>
+            <div class="faq-answer">
+                Joining as a coach is simple! Just click the Profile tab, create your profile including details about
+                your sports expertise, coaching experience, and the services you offer. Once submitted, it will be
+                visible to potential clients who can then contact you by the phone number or email you (optionally)
+                provide.
+            </div>
+
+            <div class="faq-question">Do I need to sign up as a high school athlete or parent?</div>
+            <div class="faq-answer">
+                No! Our platform is in beta and currently free to use, so just click on the Find a Coach tab and start
+                searching!
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p> 2024 College Athlete Connect.</p>
+    </footer>
+</body>
+
+</html>
+
+<!-- The above code was created with assitance from Chat GPT-->

@@ -1,0 +1,557 @@
+/* General Design */
+header {
+    background: rgb(255, 49, 49);
+    border: 1px solid black;
+    align-items: center;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 0px 0px;
+    margin: 0;
+    height: 8vh;
+    width: 100%;
+}
+
+body,
+html {
+    background: white;
+    margin: 0 0;
+    padding: 0 0;
+    width: 100%;
+    height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Navigation Bar */
+.nav-bar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-bar>div {
+    display: flex;
+    align-items: center;
+}
+
+.left-links,
+.right-links {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex: 1;
+}
+
+.left-links {
+    justify-content: flex-start;
+}
+
+.right-links {
+    justify-content: flex-end;
+}
+
+.left-links a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    font-size: calc(1.5vh + 1vw);
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    background-color: transparent;
+    border-radius: 0;
+    transition: color 0.3s;
+}
+
+.right-links a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    margin: 0px 5px;
+    font-size: calc(1vh + 1vw);
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.right-links a:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+    transform: scale(1.05);
+}
+
+.left-links a:hover {
+    color: white;
+    transform: scale(1.05);
+    text-decoration: none;
+}
+
+.nav-logo img {
+    max-height: 8vh;
+    width: auto;
+    text-align: center;
+    flex-grow: 1;
+}
+
+/* Home Page (index.html) */
+.banner-home {
+    width: 100vw;
+    display: block;
+    border-bottom: 2px solid #000;
+}
+
+.section-home {
+    text-align: center;
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+}
+
+.section-home h1 {
+    font-size: 36px;
+    color: #000;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.section-home h2 {
+    font-size: 28px;
+    color: #000;
+    font-weight: bold;
+}
+
+.section-home p {
+    font-size: 20px;
+    color: #000;
+    line-height: 1.6;
+    padding: 0 15px;
+}
+
+.btn-home {
+    padding: 15px 30px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 20px;
+    background-color: rgb(255, 49, 49);
+    transition: background-color 0.3s ease;
+    display: inline-block;
+}
+
+.btn-home:hover {
+    background-color: #cc3d3d;
+}
+
+
+/* FAQ */
+.faq-container {
+    padding: 0px 150px;
+    margin: 0px auto;
+    max-width: 1200px;
+}
+
+.faq-question {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 20px 0 10px 0;
+}
+
+.faq-answer {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+/* About Us */
+.about-top,
+.about-box,
+.about-info,
+.contact-info {
+    padding: 0 30px;
+}
+
+.about-box {
+    margin: 0px auto;
+    max-width: 1200px;
+}
+
+.about-top h1 {
+    font-size: 32px;
+    font-weight: bold;
+    font-style: italic;
+    color: #000000;
+    text-align: center;
+    margin: 0;
+    margin-top: 0;
+    padding-top: 20px;
+}
+
+.about-top img {
+    display: block;
+    margin: 2px auto 5px;
+    width: 30%;
+    border: 5px solid #ddd;
+    box-shadow: 0 0 8px #aaa;
+}
+
+.about-top figcaption {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.about-info h1 {
+    text-align: center;
+    font-size: 24px;
+}
+
+.contact-info h2,
+.about-info p,
+.contact-info p {
+    text-align: center;
+    font-size: 18px;
+    line-height: 1.6;
+    margin: 0 auto;
+    padding: 0 15px;
+    margin-bottom: 20px;
+}
+
+.contact-info h2 {
+    font-size: 24px;
+    color: #000000;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.contact-info p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.contact-info a {
+    display: flexbox;
+    background-color: rgb(255, 49, 49);
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.contact-info a:hover {
+    background-color: #cc3d3d;
+}
+
+
+/* Login and SignUp */
+.login-container {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form input[type="email"],
+.login-form input[type="password"] {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.login-form button {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #ff3131;
+    color: white;
+    cursor: pointer;
+}
+
+.login-form button:hover {
+    background-color: #ff6161;
+}
+
+.signup-prompt {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.signup-prompt a {
+    color: #ff3131;
+    text-decoration: none;
+}
+
+.signup-prompt a:hover {
+    text-decoration: underline;
+}
+
+/* Profile */
+#main-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+#profile-container {
+    width: 70%;
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+#profile-container img {
+    width: 60%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 10%;
+    margin-bottom: 20px;
+}
+
+#profile-container h2,
+#profile-container p {
+    margin: 20px 0;
+    font-size: 1.4em;
+    font-weight: normal;
+}
+
+#profile-container p strong {
+    font-weight: bold;
+}
+
+button {
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #ff3131;
+    color: white;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+button:hover {
+    background-color: #ff6161;
+}
+
+/* Find a coach */
+.profiles-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.profile-box {
+    width: calc(33% - 40px);
+    margin: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    text-align: center;
+    cursor: pointer;
+}
+
+.profile-box img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    object-position: center top;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.profile-box p:first-of-type {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 15px 0 5px;
+}
+
+.profile-box p {
+    font-size: 1em;
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: auto;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.modal-content img {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+.close {
+    align-self: flex-end;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    margin: -10px -10px 10px 10px;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#search-container {
+    text-align: center;
+    margin: 20px;
+}
+
+#profile-search {
+    padding: 10px;
+    width: 50%;
+    max-width: 300px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+#search-message {
+    color: #333;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Edit Profile */
+.signup-container {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.signup-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.signup-form input[type="email"],
+.signup-form input[type="tel"],
+.signup-form input[type="text"],
+.signup-form textarea {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.signup-form button {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #ff3131;
+    color: white;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.signup-form button:hover {
+    background-color: #ff6161;
+}
+
+.form-field {
+    margin-bottom: 10px;
+}
+
+.form-field label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.bio-field {
+    margin-bottom: 20px;
+}
+
+/* Change Password */
+
+#main-content-pass {
+    width: 100%;
+    padding-top: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#change-password-container {
+    width: 70%;
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+#change-password-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#change-password-form input[type="password"],
+#change-password-form button {
+    width: 80%;
+    margin: 10px 0;
+    padding: 10px;
+}
+
+/* Footer */
+footer {
+    background: #2a2a2a;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+    border-top: 1px solid black;
+    width: 100%;
+    text-align: center;
+}
+
+/* The above code was created with assitance from Chat GPT  */

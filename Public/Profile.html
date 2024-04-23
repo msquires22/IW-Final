@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - College Athlete Connect</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <div id="navbar-placeholder"></div>
+    </header>
+    <script>
+        fetch('navbar.html')
+            .then(response => response.text())
+            .then(text => document.getElementById('navbar-placeholder').innerHTML = text);
+    </script>
+    <div id="main-content">
+        <main id="profile-container">
+            <h2>User Profile</h2>
+        </main>
+        <div>
+            <button id="edit-profile-btn">Edit Profile</button>
+            <button id="logout-btn">Log Out</button>
+            <button id="change-password-btn">Change Password</button>
+            <button id="delete-account-btn">Delete Account</button>
+        </div>
+    </div>
+    <footer>
+        <p> 2024 College Athlete Connect</p>
+    </footer>
+    <script type="module">
+        import { db } from './firebaseconfig.js';
+        import { signOut, getAuth, deleteUser, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js';
+        import { doc, getDoc } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js';
+
+        const auth = getAuth();
+        const profileContainer = document.getElementById('profile-container');
+
+        if (new URLSearchParams(window.location.search).get('passwordChange') === 'success') {
+            alert('Password changed successfully.');
+        }
+        // Display user profile data
+        onAuthStateChanged(auth, user => {
+            if (user) {
+                const docRef = doc(db, "users", user.uid);
+                getDoc(docRef).then(docSnap => {
+                    if (docSnap.exists()) {
+                        const data = docSnap.data(); // Correctly define data here
+                        const imageUrl = data.photoURL || './images/profileIcon.jpeg';
+                        profileContainer.innerHTML = `
+                            <img src="${imageUrl}" alt="Profile Image">
+                            <p><strong>Name:</strong> ${data.name}</p>
+                            <p><strong>Sport:</strong> ${data.sport}</p>
+                            <p><strong>School:</strong> ${data.school}</p>
+                            <p><strong>Class Year:</strong> ${data.classYear}</p>
+                            <p><strong>Rate:</strong> ${data.rate}</p>
+                            <p><strong>Bio:</strong> ${data.bio}</p>
+                            <p><strong>Email:</strong> ${data.email}</p>
+                            <p><strong>Phone Number:</strong> ${data.phoneNumber}</p>
+                            `;
+                    }
+                    else {
+                        profileContainer.innerHTML = "<p>No profile information found.</p>";
+                    }
+                });
+            } else {
+                window.location.href = 'LogIn.html'; // Redirect to login
+            }
+        });
+
+        // Edit profile button
+        document.getElementById('edit-profile-btn').addEventListener('click', () => {
+            window.location.href = 'EditProfile.html';
+        });
+
+        // Logout functionality
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            signOut(auth).then(() => {
+                window.location.href = 'LogIn.html';
+            }).catch((error) => {
+                console.error('Sign Out Error', error);
+            });
+        });
+
+        document.getElementById('change-password-btn').addEventListener('click', () => {
+            window.location.href = 'ChangePassword.html'; // Redirect to change password page
+        });
+
+        // Delete account
+        document.getElementById('delete-account-btn').addEventListener('click', () => {
+            if (confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
+                const user = auth.currentUser;
+                deleteUser(user).then(() => {
+                    alert("Account deleted successfully.");
+                    window.location.href = 'SignUp.html'; // Redirect somewhere relevant
+                }).catch((error) => {
+                    console.error('Error deleting account', error);
+                    alert("Failed to delete account. Please try again.");
+                });
+            }
+        });
+
+    </script>
+</body>
+
+</html>
+
+<!-- The above code was created with assitance from Chat GPT-->
